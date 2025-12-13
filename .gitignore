@@ -133,7 +133,6 @@ data/
 # data/backend/log/
 # data/backend/config/.config.yml
 # !data/backend/config/.gitkeep
-old/
 *.sql
 *.sql.gz
 backup/
