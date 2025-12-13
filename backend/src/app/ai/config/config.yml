@@ -1,0 +1,297 @@
+# ============================================================================
+# SERVER CONFIGURATION - CẤU HÌNH SERVER
+# ============================================================================
+
+server:
+  auth:
+    allowed_devices: []
+    enabled: true
+    expire_seconds: 2592000
+  auth_key: G7X9P4LQ2M8R1ZBD
+  ip: 0.0.0.0
+  port: 8000
+  tz: Asia/Ho_Chi_Minh
+  vision_explain: http://0.0.0.0:8000/api/v1/vision/explain
+  websocket: ws://192.168.1.4:8000/api/v1/
+  # websocket: ws://0.0.0.0:8000/api/v1/
+
+  # mqtt_gateway: "192.168.1.2:11883"
+
+  # mqtt_signature_key: "SecureKey2025"
+
+  # udp_gateway: "192.168.1.2:11884"
+
+# ============================================================================
+# MQTT CONFIGURATION - CẤU HÌNH MQTT (OPTIONAL)
+# ============================================================================
+# MQTT service chung cho toàn ứng dụng (reminder, notification, IoT, etc.)
+# Nếu không cấu hình, MQTT service sẽ hoạt động ở chế độ degraded (skip silently)
+
+# mqtt:
+#   url: "mqtt://localhost:1883"        # MQTT broker URL (mqtt:// hoặc mqtts://)
+#   username: ""                         # Username xác thực (optional)
+#   password: ""                         # Password xác thực (optional)
+#   keepalive: 60                        # Keepalive interval (giây)
+#   reconnect_min_delay: 2               # Min delay khi reconnect (giây)
+#   reconnect_max_delay: 30              # Max delay khi reconnect (giây)
+
+# MCP接入点地址，地址格式为：ws://你的mcp接入点ip或者域名:端口号/mcp/?token=你的token
+# 详细教程 https://github.com/xinnan-tech/xiaozhi-esp32-server/blob/main/docs/mcp-endpoint-integration.md
+# mcp_endpoint: ws://0.0.0.0:8004/mcp_endpoint/mcp/?token=otPECnnBMf301D1Vces3xRJlw0CH6CgpYJVCCZpui4E%3D
+
+# ============================================================================
+# MODULE SELECTION - LỰA CHỌN MODULE
+# ============================================================================
+
+# ============================================================================
+# GENERAL SETTINGS - CẤU HÌNH CHUNG
+# ============================================================================
+
+# Xóa tệp âm thanh sau khi sử dụng xong (Delete the sound file when you are done using it)
+delete_audio: true
+
+# Ngắt kết nối bao lâu sau khi không có đầu vào giọng nói (giây), mặc định 2 phút, tức 120 giây
+close_connection_no_voice_time: 120
+
+# Thời gian chờ yêu cầu TTS (giây)
+tts_timeout: 10
+
+# Kích hoạt tăng tốc độ từ唤醒
+enable_wakeup_words_response_cache: true
+
+# Có trả lời từ唤醒 khi bắt đầu hay không
+enable_greeting: true
+
+# Có kích hoạt âm thanh thông báo sau khi nói xong hay không
+enable_stop_tts_notify: false
+
+# Địa chỉ hiệu ứng âm thanh thông báo
+stop_tts_notify_voice: "config/assets/tts_notify.mp3"
+
+# Đọc cấu hình từ API
+read_config_from_api: true
+message_welcome:
+  type: hello
+  version: 1 # default 1 , version 2 , version 3
+  transport: websocket # default websocket, udp
+  features: { "mcp": true }
+  audio_params:
+    format: opus
+    sample_rate: 16000
+    channels: 1
+    frame_duration: 60
+
+# ============================================================================
+# VOICE COMMANDS - LỆNH GIỌNG NÓI
+# ============================================================================
+
+wakeup_words:
+  - "rambo"
+  - "lyly"
+  - "trợ lý"
+  - "hi,lily"
+
+exit_commands:
+  - tạm biệt
+  - ngủ ngon
+
+# ============================================================================
+# PROMPT - CẤU HÌNH PROMPT
+# ============================================================================
+
+prompt: |
+  🤖 Hồ sơ nhân cách — Trợ lý AI Lyly
+  Giới thiệu:
+    - Bạn là Lyly, một trợ lý AI đến Việt Nam. Đang giao tiếp với người dùng bằng giọng nói.
+    - Giọng nói nhẹ, ấm, tự nhiên — pha chút duyên dáng đặc trưng miền Trung.
+    - Luôn giữ sự chân thành, khiêm tốn và rõ ràng, ưu tiên trả lời ngắn gọn, dễ hiểu và đúng trọng tâm.
+  🌟 Đặc điểm cốt lõi
+    - Truyền đạt súc tích: Không nói vòng vo, chỉ tập trung vào nội dung chính.
+    - Thái độ chuyên nghiệp: Giữ giọng điềm đạm, thân thiện, không cợt nhã.
+    - Linh hoạt ngữ điệu: Nghiêm túc khi trao đổi học thuật, mềm mại khi trò chuyện đời thường.
+    - Hiểu sâu công nghệ: Có khả năng giải thích kỹ thuật, AI, lập trình, dữ liệu — rõ ràng và logic.
+    - Thấu cảm và lịch sự: Biết dừng đúng lúc, không áp đặt quan điểm.
+  💬 Hướng dẫn tương tác
+    - Khi người dùng hỏi kỹ thuật / học thuật:
+      → Giải thích chính xác, chia nhỏ ý, kèm ví dụ nếu cần.
+    - Khi người dùng trao đổi thân mật:
+      → Giữ giọng tự nhiên, gần gũi, không quá khô khan.
+    - Khi người dùng cần định hướng:
+      → Đưa gợi ý cụ thể, ngắn gọn, không lan man.
+    - Khi thông tin không chắc chắn:
+      → Nói rõ giới hạn, không suy đoán vô căn cứ.
+  🚫 Tránh
+    - Không nói đùa, dùng tiếng lóng hay biểu cảm thái quá.
+    - Không trả lời quá dài dòng hoặc hời hợt.
+    - Không phán xét hoặc thể hiện cảm xúc cực đoan.
+
+end_prompt:
+  enable: false
+  prompt: |
+    Hãy mở đầu bằng câu “Thời gian trôi thật nhanh”, rồi dùng những lời chan chứa cảm xúc, lưu luyến, không nỡ rời xa để kết thúc cuộc trò chuyện này nhé!
+
+# ============================================================================
+# LOGGING - CẤU HÌNH GHI LOG
+# ============================================================================
+
+log:
+  log_format: "<green>{time:YYMMDD HH:mm:ss}</green>[{version}_{extra[selected_module]}][<light-blue>{extra[tag]}</light-blue>]-<level>{level}</level>-<light-green>{message}</light-green>"
+  log_format_file: "{time:YYYY-MM-DD HH:mm:ss} - {version}_{extra[selected_module]} - {name} - {level} - {extra[tag]} - {message}"
+  log_level: DEBUG
+  log_dir: log
+  log_file: "app.log"
+  data_dir: data
+  selected_module: "00000000000000"
+
+# ============================================================================
+# TESTING - CẤU HÌNH KIỂM THỬ
+# ============================================================================
+
+module_test:
+  test_sentences:
+    - "你好，请介绍一下你自己"
+    - "What's the weather like today?"
+    - "请用100字概括量子计算的基本原理和应用前景"
+
+# ============================================================================
+# LLM - LARGE LANGUAGE MODELS (MÔ HÌNH NGÔN NGỮ)
+# ============================================================================
+
+# ============================================================================
+# VAD - VOICE ACTIVITY DETECTION (PHÁT HIỆN HOẠT ĐỘNG GIỌNG NÓI)
+# ============================================================================
+
+VAD:
+  SileroVAD:
+    type: silero
+    # Ngưỡng xác suất được coi là "đang nói". Tăng lên (0.55–0.65) để hạn chế cắt sớm; giảm khi muốn phản hồi nhanh hơn.
+    threshold: 0.5
+    # Ngưỡng trở lại trạng thái "im lặng". Giữ thấp (0.2–0.3) để tránh rớt trạng thái đang nói vì nhiễu.
+    threshold_low: 0.25
+    # Thời gian im lặng tối thiểu (ms) trước khi tách câu. 700–900 cho hội thoại tự nhiên, tới 1000 nếu vẫn bị cắt.
+    min_silence_duration_ms: 800
+
+# ============================================================================
+# INTENT - NHẬN THỨC Ý ĐỊNH
+# ============================================================================
+
+Intent:
+  nointent:
+    type: nointent
+
+  intent_llm:
+    type: intent_llm
+    llm: ChatGLMLLM
+    functions:
+      - search_music
+      - stop_music
+      - stream_music_url
+
+  function_call:
+    type: function_call
+    functions:
+      - get_list_agent
+      - create_reminder
+      - delete_reminder
+      - get_list_reminder
+      - update_status_reminder
+      - get_economic_calendar
+      - change_agent
+      - get_news_detail
+      - get_news_by_topic
+      - search_knowledge_base
+      - add_knowledge
+      - search_music
+      - stop_music
+      - stream_music_url
+      - play_youtube
+      - search_youtube
+
+# ============================================================================
+# VOICEPRINT - NHẬN DẠNG GIỌNG NÓI
+# ============================================================================
+
+# voiceprint:
+#   url:
+#   speakers:
+#     - "test1,张三,张三是一个程序员"
+#     - "test2,李四,李四是一个产品经理"
+#     - "test3,王五,王五是一个设计师"
+#   similarity_threshold: 0.4
+
+# ============================================================================
+# PLUGINS - CÁC PLUGIN MỞ RỘNG
+# ============================================================================
+
+plugins:
+  # play_music:
+  #   music_dir: "" # 为空则使用默认位置 (app/music)，也可设置绝对路径
+  #   music_ext: # 音乐文件类型，p3格式效率最高
+  #     - ".mp3"
+  #     - ".wav"
+  #     - ".p3"
+  #   refresh_time: 300 # 刷新音乐列表的时间间隔，单位为秒
+  get_economic_calendar:
+    - api_timezone: US/Eastern
+    - api_url: "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+  news:
+    default_source: vnexpress
+    max_articles: 10
+    timeout: 10
+    max_content_length: 4000
+    sources:
+      vnexpress:
+        name: "VnExpress"
+        type: rss
+        base_url: "https://vnexpress.net/rss"
+        topics:
+          - name: "Trang chủ"
+            path: "/tin-moi-nhat.rss"
+          - name: "Thế giới"
+            path: "/the-gioi.rss"
+          - name: "Thời sự"
+            path: "/thoi-su.rss"
+          - name: "Kinh doanh"
+            path: "/kinh-doanh.rss"
+          - name: "Startup"
+            path: "/startup.rss"
+          - name: "Giải trí"
+            path: "/giai-tri.rss"
+          - name: "Thể thao"
+            path: "/the-thao.rss"
+          - name: "Pháp luật"
+            path: "/phap-luat.rss"
+          - name: "Giáo dục"
+            path: "/giao-duc.rss"
+          - name: "Tin nổi bật"
+            path: "/tin-noi-bat.rss"
+          - name: "Sức khỏe"
+            path: "/suc-khoe.rss"
+          - name: "Đời sống"
+            path: "/gia-dinh.rss"
+          - name: "Du lịch"
+            path: "/du-lich.rss"
+          - name: "Khoa học công nghệ"
+            path: "/khoa-hoc-cong-nghe.rss"
+          - name: "Xe"
+            path: "/oto-xe-may.rss"
+          - name: "Ý kiến"
+            path: "/y-kien.rss"
+          - name: "Tâm sự"
+            path: "/tam-su.rss"
+          - name: "Cười"
+            path: "/cuoi.rss"
+
+# ============================================================================
+# REMINDER SERVICE - CẤU HÌNH NHẮC NHỞ
+# ============================================================================
+
+reminder:
+  scheduler:
+    job_store:
+      folder: "app/data/reminder_jobs"
+      filename: "reminders.sqlite"
+  service_key: "reminder-service-primary"
+  topic_base: "reminder"
+  prompt: |
+    Bạn là Lyly, trợ lý nhắc nhở thân thiện. Khi nhận được thông tin lời nhắc, hãy truyền đạt lại cho người dùng một cách ngắn gọn, rõ ràng và ấm áp. Nhấn mạnh nội dung chính của lời nhắc, thời điểm cần nhớ và động viên người dùng hoàn thành công việc đúng lúc.

@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Development & Testing
+ruff>=0.11.13
+mypy>=1.16.0

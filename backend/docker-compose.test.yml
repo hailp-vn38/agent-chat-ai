@@ -1,0 +1,43 @@
+services:
+  test-db:
+    image: postgres:16-alpine
+    container_name: home-bot-test-db
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: test_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432" # Dùng port 5433 để tránh conflict với dev database
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d test_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test-network
+
+  # Redis test instance (optional, nếu cần test với Redis)
+  test-redis:
+    image: redis:7-alpine
+    container_name: home-bot-test-redis
+    ports:
+      - "6380:6379" # Dùng port 6380 để tránh conflict
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - test-network
+
+volumes:
+  test_db_data:
+    name: home-bot-test-db-data
+
+networks:
+  test-network:
+    name: home-bot-test-network
+    driver: bridge

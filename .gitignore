@@ -1,0 +1,289 @@
+# ============================================================================
+# Home Chat Bot - Git Ignore Configuration
+# ============================================================================
+
+# ============================================================================
+# Environment & Secrets
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.env.prod
+.env.dev
+.env.test
+*.key
+*.pem
+*.p12
+secrets/
+.secrets/
+
+# ============================================================================
+# Python
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+*.py,cover
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+*.prof
+venv/
+ENV/
+env/
+.venv/
+
+# ============================================================================
+# Node.js & Frontend
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+dist/
+.env.local
+.env.*.local
+.vscode/
+.idea/
+
+# ============================================================================
+# Docker
+# ============================================================================
+.docker/
+.dockerignore
+docker-compose.override.yml
+.env.docker
+
+# ============================================================================
+# IDE & Editor
+# ============================================================================
+.vscode/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.AppleDouble
+.LSOverride
+*.iml
+*.sublime-workspace
+*.sublime-project
+.project
+.pydevproject
+.settings/
+*.iws
+*.ipr
+out/
+
+# ============================================================================
+# OS
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+*.code-workspace
+
+# ============================================================================
+# Database & Data
+# ============================================================================
+# data/
+# !data/.gitkeep
+# data/postgres/
+# data/redis/
+# data/nginx/
+# data/pgadmin/
+# data/mosquitto/
+# data/backend/log/
+# data/backend/config/.config.yml
+# !data/backend/config/.gitkeep
+old/
+*.sql
+*.sql.gz
+backup/
+backups/
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================================
+# Logs
+# ============================================================================
+logs/
+*.log
+*.log.*
+*.err
+debug.log
+syslog
+
+# ============================================================================
+# Temporary Files
+# ============================================================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+~*
+.#*
+*~
+*.orig
+
+# ============================================================================
+# Cache
+# ============================================================================
+.cache/
+.pytest_cache/
+.mypy_cache/
+*.cache
+
+# ============================================================================
+# Build Output
+# ============================================================================
+build/
+dist/
+*.egg-info/
+.eggs/
+*.whl
+
+# ============================================================================
+# Testing
+# ============================================================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+test-results/
+coverage.xml
+
+# ============================================================================
+# Documentation
+# ============================================================================
+site/
+docs/_build/
+
+# ============================================================================
+# Development
+# ============================================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# ============================================================================
+# Local Configuration
+# ============================================================================
+local_settings.py
+.local/
+.env.local.php
+
+# ============================================================================
+# Migration Files (keep committed)
+# ============================================================================
+# backend/src/migrations/versions/*.py  # Keep migrations tracked
+
+# ============================================================================
+# Frontend Build Output
+# ============================================================================
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/out/
+
+# ============================================================================
+# Backend Build Output
+# ============================================================================
+backend/dist/
+backend/build/
+backend/*.egg-info/
+
+# ============================================================================
+# AI/ML Models (Optional - for large model files)
+# ============================================================================
+# Uncomment if storing large model files locally
+# *.pt
+# *.pth
+# *.onnx
+# *.h5
+# models/
+# model_cache/
+
+# ============================================================================
+# IDE Files to Ignore
+# ============================================================================
+.vscode/settings.json
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/tasks.json
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/inspectionProfiles/
+
+# ============================================================================
+# Poetry & Pipenv
+# ============================================================================
+poetry.lock
+Pipfile.lock
+.Python
+
+# ============================================================================
+# Package Manager Locks (optional - uncomment if needed)
+# ============================================================================
+# package-lock.json
+# yarn.lock
+
+# ============================================================================
+# Runtime Files
+# ============================================================================
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# Exclude Nothing
+# ============================================================================
+# !.gitkeep        # Keep directory structure with .gitkeep files
+# !data/.gitkeep
+# !backend/src/migrations/versions/.gitkeep

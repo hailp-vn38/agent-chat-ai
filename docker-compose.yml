@@ -1,0 +1,151 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_PATH=/api/v1
+        - VITE_OTA_URL=/api/v1/ota
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE_PATH=/api/v1
+      - VITE_OTA_URL=/api/v1/ota
+    networks:
+      - homebot
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    # -------- replace with comment to run with gunicorn --------
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # command: gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend/src/app:/app/src/app
+      - backend_data:/app/src/app/data
+      - backend_logs:/app/src/data/backend/log
+      - ./.env:/app/src/.env:ro
+    env_file:
+      - ./.env
+    networks:
+      - homebot
+
+  # mcp-endpoint-server:
+  #   image: ghcr.nju.edu.cn/xinnan-tech/mcp-endpoint-server:latest
+  #   container_name: mcp-endpoint-server
+  #   restart: always
+  #   networks:
+  #     - homebot
+  #   ports:
+  #     - "8004:8004"
+  #   security_opt:
+  #     - seccomp:unconfined
+  #   environment:
+  #     - TZ=Asia/Ho_Chi_Minh
+  #   volumes:
+  #     - ./data/mcp:/app/data
+
+  # memory:
+  #   image: hailp/memory-custom:latest
+  #   env_file:
+  #     - ./.env
+  #   volumes:
+  #     - ./data/openmemory:/app/data
+  #   ports:
+  #     - "8080:8080"
+  #   restart: unless-stopped
+  #   networks:
+  #     - homebot
+
+  # dashboard-memory:
+  #   image: hailp/dashboard-memory:latest
+  #   container_name: dashboard-memory
+  #   ports:
+  #     - "3333:3000"
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=@{OPENMEMORY_URL:http://memory:8080}
+  #     - NEXT_PUBLIC_API_KEY=${OM_API_KEY:-openmemory_secret_key_12345}
+  #   depends_on:
+  #     - memory
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:3000"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 30s
+
+  db:
+    image: postgres:13
+    env_file:
+      - ./.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: 600M
+        reservations:
+          cpus: "0.2"
+          memory: 400M
+    networks:
+      - homebot
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 200M
+        reservations:
+          cpus: "0.1"
+          memory: 100M
+    networks:
+      - homebot
+
+networks:
+  homebot:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/postgres
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/redis
+  backend_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/backend/config
+  backend_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/backend/log

@@ -1,0 +1,29 @@
+{
+  "page": {
+    "title": "Devices",
+    "description": "Manage connected devices and integrations"
+  },
+  "devices": "Devices",
+  "add_device": "Add Device",
+  "bind_device": "Bind Device",
+  "remove_device": "Remove Device",
+  "device_name": "Device Name",
+  "device_status": "Status",
+  "device_type": "Type",
+  "no_devices": "No devices found",
+  "loading_devices": "Loading devices...",
+  "error_loading_devices": "Failed to load devices",
+  "error_adding_device": "Failed to add device",
+  "error_removing_device": "Failed to remove device",
+  "confirm_remove_device": "Are you sure you want to remove this device?",
+  "device_added_success": "Device added successfully",
+  "device_removed_success": "Device removed successfully",
+  "device_online": "Online",
+  "device_offline": "Offline",
+  "last_seen": "Last seen",
+  "devices_description": "Manage connected devices and integrations",
+  "no_devices_description": "No devices connected yet. Add a device to get started.",
+  "page_of": "Page {{page}} of {{total}}",
+  "previous": "Previous",
+  "next": "Next"
+}

@@ -1,0 +1,18 @@
+{
+  "page": {
+    "title": "Tools",
+    "description": "View available tools for your agents"
+  },
+  "tools": "Tools",
+  "tools_description": "View available tools for your agents",
+  "tool": "Tool",
+  "available": "available",
+  "no_tools": "No Tools Available",
+  "no_tools_description": "There are no tools matching your filter criteria",
+  "error_loading": "Failed to load tools",
+  "tool_name": "Tool Name",
+  "category": "Category",
+  "parameters": "Parameters",
+  "params": "params",
+  "basic_info": "Basic Information"
+}

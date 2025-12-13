@@ -1,0 +1,18 @@
+{
+  "page": {
+    "title": "Công cụ",
+    "description": "Xem các công cụ có sẵn cho agent của bạn"
+  },
+  "tools": "Công cụ",
+  "tools_description": "Xem các công cụ có sẵn cho agent của bạn",
+  "tool": "Công cụ",
+  "available": "có sẵn",
+  "no_tools": "Không có công cụ",
+  "no_tools_description": "Không có công cụ nào phù hợp với bộ lọc của bạn",
+  "error_loading": "Không thể tải danh sách công cụ",
+  "tool_name": "Tên công cụ",
+  "category": "Danh mục",
+  "parameters": "Tham số",
+  "params": "tham số",
+  "basic_info": "Thông tin cơ bản"
+}

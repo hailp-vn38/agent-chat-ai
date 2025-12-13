@@ -1,0 +1,29 @@
+{
+  "page": {
+    "title": "Thiết bị",
+    "description": "Quản lý các thiết bị kết nối và tích hợp"
+  },
+  "devices": "Thiết Bị",
+  "add_device": "Thêm Thiết Bị",
+  "bind_device": "Liên Kết Thiết Bị",
+  "remove_device": "Xóa Thiết Bị",
+  "device_name": "Tên Thiết Bị",
+  "device_status": "Trạng Thái",
+  "device_type": "Loại",
+  "no_devices": "Không tìm thấy thiết bị",
+  "loading_devices": "Đang tải thiết bị...",
+  "error_loading_devices": "Không thể tải thiết bị",
+  "error_adding_device": "Không thể thêm thiết bị",
+  "error_removing_device": "Không thể xóa thiết bị",
+  "confirm_remove_device": "Bạn có chắc chắn muốn xóa thiết bị này?",
+  "device_added_success": "Thiết bị được thêm thành công",
+  "device_removed_success": "Thiết bị được xóa thành công",
+  "device_online": "Trực Tuyến",
+  "device_offline": "Ngoài Tuyến",
+  "last_seen": "Lần cuối nhìn thấy",
+  "devices_description": "Quản lý các thiết bị được kết nối và tích hợp",
+  "no_devices_description": "Chưa có thiết bị nào được kết nối. Thêm một thiết bị để bắt đầu.",
+  "page_of": "Trang {{page}} của {{total}}",
+  "previous": "Quay Lại",
+  "next": "Tiếp Theo"
+}
