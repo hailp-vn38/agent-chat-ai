@@ -100,6 +100,8 @@ export const RegisterPage = () => {
         onSuccess: () => {
           // Clear form on successful registration
           form.reset();
+          // Clear auth error before redirecting
+          setAuthError(null);
           // Redirect to login page
           navigate("/login", { replace: true });
         },

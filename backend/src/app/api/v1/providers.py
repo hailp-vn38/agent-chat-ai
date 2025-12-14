@@ -823,6 +823,8 @@ async def create_provider(
     created = await crud_provider.create(
         db=db,
         object=provider_internal,
+        schema_to_select=ProviderRead,
+        return_as_model=True,
     )
 
     # Convert ORM object to dict for response

@@ -59,9 +59,11 @@ export const LoginPage = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
+      // Clear auth error before redirecting
+      setAuthError(null);
       navigate("/", { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, setAuthError]);
 
   const onSubmit = (values: LoginFormValues) => {
     // Clear previous auth error

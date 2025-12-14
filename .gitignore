@@ -124,6 +124,8 @@ Thumbs.db
 # Database & Data
 # ============================================================================
 data/
+data/backend/config/.config.yml
+
 # !data/.gitkeep
 # data/postgres/
 # data/redis/

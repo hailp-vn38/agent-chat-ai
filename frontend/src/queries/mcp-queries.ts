@@ -104,7 +104,9 @@ const mcpConfigAPI = {
    */
   testMcpConfig: async (configId: string): Promise<McpTestResult> => {
     const { data } = await apiClient.post<McpTestResult>(
-      MCP_ENDPOINTS.TEST(configId)
+      MCP_ENDPOINTS.TEST(configId),
+      {},
+      { timeout: 30000 } // 30s timeout
     );
     return data;
   },
@@ -119,7 +121,7 @@ const mcpConfigAPI = {
     const { data } = await apiClient.post<McpTestRawResponse>(
       MCP_ENDPOINTS.TEST_RAW,
       payload,
-      { timeout: 30000 } // 30s timeout
+      { timeout: 120000 } // 120s timeout
     );
     return data;
   },

@@ -73,10 +73,12 @@ async def register(
     del user_internal_dict["password"]
 
     user_internal = UserCreateInternal(**user_internal_dict)
-    created_user = await crud_users.create(db=db, object=user_internal)
+    created_user = await crud_users.create(
+        db=db, object=user_internal, schema_to_select=UserRead, return_as_model=True
+    )
 
     user_read = await crud_users.get(
-        db=db, id=created_user.id, schema_to_select=UserRead
+        db=db, id=created_user.id, schema_to_select=UserRead, return_as_model=True
     )
     if user_read is None:
         raise NotFoundException("Created user not found")

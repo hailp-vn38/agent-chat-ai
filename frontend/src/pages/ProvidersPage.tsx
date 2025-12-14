@@ -198,7 +198,9 @@ const ProvidersPageComponent = () => {
       deleteProvider(providerToDelete.id, {
         onSuccess: () => {
           setDeleteDialogOpen(false);
+          setIsSheetOpen(false);
           setProviderToDelete(null);
+          setSelectedProvider(null);
         },
       });
     }
