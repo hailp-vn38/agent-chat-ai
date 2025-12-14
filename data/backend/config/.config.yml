@@ -155,7 +155,7 @@ TTS:
 
   ElevenLabsTTS:
     type: elevenlab
-    api_key: "fed5b7c4d02e211c22a6fe3b3925380829dfaacb30e3060e75e87e2484ba5049"
+    api_key: "key"
     api_url: "https://api.elevenlabs.io/v1/text-to-speech"
     voice_id: "foH7s9fX31wFFH2yqrFa" # Default voice ID
     model_id: "eleven_flash_v2_5" # eleven_monolingual_v1, eleven_multilingual_v1, eleven_multilingual_v2
