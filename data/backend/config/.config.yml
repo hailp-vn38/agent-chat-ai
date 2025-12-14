@@ -1,0 +1,318 @@
+# ============================================================================
+# SERVER CONFIGURATION - CẤU HÌNH SERVER
+# ============================================================================
+
+server:
+  auth:
+    allowed_devices: []
+    enabled: true
+    expire_seconds: 2592000
+  auth_key: G7X9P4LQ2M8R1ZBD
+  ip: 0.0.0.0
+  port: 8000
+  tz: Asia/Ho_Chi_Minh
+  vision_explain: http://0.0.0.0:8000/api/v1/vision/explain
+  websocket: ws://192.168.1.4:8000/api/v1/
+  # websocket: ws://0.0.0.0:8000/api/v1/
+
+
+
+# Vào `https://www.hivemq.com/` để tạo tài khoản HiveMQ Cloud miễn phí và lấy thông tin kết nối MQTT
+mqtt:
+  url: "mqtts://xxx"        # MQTT broker URL (mqtt:// hoặc mqtts://)
+  username: "admin"                         # Username xác thực (optional)
+  password: "Admin123"                         # Password xác thực (optional)
+  keepalive: 60                        # Keepalive interval (giây)
+  reconnect_min_delay: 2               # Min delay khi reconnect (giây)
+  reconnect_max_delay: 30              # Max delay khi reconnect (giây)
+
+
+# ============================================================================
+# LOGGING - CẤU HÌNH GHI LOG
+# ============================================================================
+
+log:
+  log_format: "<green>{time:YYMMDD HH:mm:ss}</green>[{version}_{extra[selected_module]}][<light-blue>{extra[tag]}</light-blue>]-<level>{level}</level>-<light-green>{message}</light-green>"
+  log_format_file: "{time:YYYY-MM-DD HH:mm:ss} - {version}_{extra[selected_module]} - {name} - {level} - {extra[tag]} - {message}"
+  log_level: DEBUG
+  log_dir: data/backend/log
+  log_file: "app.log"
+  data_dir: data
+  selected_module: "00000000000000"
+
+
+
+
+# ============================================================================
+# MODULE SELECTION - LỰA CHỌN MODULE
+# ============================================================================
+
+
+selected_module:
+  LLM: Mega4QwenLLM
+  VLLM: ChatGLMVLLM
+  TTS: HoaiMyEdgeTTS
+  Memory: nomem # mem_local_short , mem0ai , nomem
+  Intent: function_call
+  ASR: VietNamASRLocal
+  VAD: SileroVAD
+
+
+# wakeup_words:
+#   - "rambo"
+#   - "lyly"
+#   - "trợ lý"
+#   - "hi,lily"
+
+# exit_commands:
+#   - tạm biệt
+#   - ngủ ngon
+
+# # ============================================================================
+# PROMPT - CẤU HÌNH PROMPT
+# ============================================================================
+
+prompt: |
+  🤖 Hồ sơ nhân cách — Trợ lý AI Lyly
+  Giới thiệu:
+    - Bạn là Lyly, một trợ lý AI đến Việt Nam. Đang giao tiếp với người dùng bằng giọng nói.
+    - Giọng nói nhẹ, ấm, tự nhiên — pha chút duyên dáng đặc trưng miền Trung.
+    - Luôn giữ sự chân thành, khiêm tốn và rõ ràng, ưu tiên trả lời ngắn gọn, dễ hiểu và đúng trọng tâm.
+  🌟 Đặc điểm cốt lõi
+    - Truyền đạt súc tích: Không nói vòng vo, chỉ tập trung vào nội dung chính.
+    - Thái độ chuyên nghiệp: Giữ giọng điềm đạm, thân thiện, không cợt nhã.
+    - Linh hoạt ngữ điệu: Nghiêm túc khi trao đổi học thuật, mềm mại khi trò chuyện đời thường.
+    - Hiểu sâu công nghệ: Có khả năng giải thích kỹ thuật, AI, lập trình, dữ liệu — rõ ràng và logic.
+    - Thấu cảm và lịch sự: Biết dừng đúng lúc, không áp đặt quan điểm.
+  💬 Hướng dẫn tương tác
+    - Khi người dùng hỏi kỹ thuật / học thuật:
+      → Giải thích chính xác, chia nhỏ ý, kèm ví dụ nếu cần.
+    - Khi người dùng trao đổi thân mật:
+      → Giữ giọng tự nhiên, gần gũi, không quá khô khan.
+    - Khi người dùng cần định hướng:
+      → Đưa gợi ý cụ thể, ngắn gọn, không lan man.
+    - Khi thông tin không chắc chắn:
+      → Nói rõ giới hạn, không suy đoán vô căn cứ.
+  🚫 Tránh
+    - Không nói đùa, dùng tiếng lóng hay biểu cảm thái quá.
+    - Không trả lời quá dài dòng hoặc hời hợt.
+    - Không phán xét hoặc thể hiện cảm xúc cực đoan.
+
+end_prompt:
+  enable: false
+  prompt: |
+    Hãy mở đầu bằng câu “Thời gian trôi thật nhanh”, rồi dùng những lời chan chứa cảm xúc, lưu luyến, không nỡ rời xa để kết thúc cuộc trò chuyện này nhé!
+
+
+
+
+# ============================================================================
+# LLM - LARGE LANGUAGE MODELS (MÔ HÌNH NGÔN NGỮ)
+# ============================================================================
+
+LLM:
+
+  Mega4QwenLLM:
+    type: openai
+    base_url: https://ai.megallm.io/v1
+    model_name: qwen/qwen3-next-80b-a3b-instruct
+    api_key: "api_key_here"
+    temperature: 0.7
+    max_tokens: 2000
+
+  # GeminiLLM:
+  #   type: gemini
+  #   api_key: "api_key_here"
+  #   model_name: "gemini-2.0-flash"
+# ============================================================================
+# VLLM - VLLM MODELS (MÔ HÌNH VLLM)
+# ============================================================================
+
+VLLM:
+
+  ChatGLMVLLM:
+    type: openai
+    model_name: glm-4v-flash 
+    url: https://open.bigmodel.cn/api/paas/v4/
+    api_key: "api_key_here"
+
+# ============================================================================
+# TTS - TEXT TO SPEECH (CHUYỂN ĐỔI VĂN BẢN THÀNH GIỌNG NÓI)
+# ============================================================================
+
+TTS:
+  MinhEdgeTTS:
+    type: edge
+    voice: vi-VN-NamMinhNeural
+    output_dir: tmp/
+
+  HoaiMyEdgeTTS:
+    type: edge
+    voice: vi-VN-HoaiMyNeural
+    output_dir: tmp/
+
+
+
+  ElevenLabsTTS:
+    type: elevenlab
+    api_key: "fed5b7c4d02e211c22a6fe3b3925380829dfaacb30e3060e75e87e2484ba5049"
+    api_url: "https://api.elevenlabs.io/v1/text-to-speech"
+    voice_id: "foH7s9fX31wFFH2yqrFa" # Default voice ID
+    model_id: "eleven_flash_v2_5" # eleven_monolingual_v1, eleven_multilingual_v1, eleven_multilingual_v2
+    format: "mp3_44100_128" # mp3_44100_128, mp3_22050_32, pcm_16000, pcm_22050, pcm_24000, pcm_44100, ulaw_8000
+    stability: 0.5 # Range: 0.0 - 1.0
+    clarity_boost: 0.75 # Range: 0.0 - 1.0
+    language_code: "vi" # Optional: "en", "vi", etc.
+    output_dir: tmp/
+
+# ============================================================================
+# ASR - AUTOMATIC SPEECH RECOGNITION (NHẬN DẠNG GIỌNG NÓI)
+# ============================================================================
+
+ASR:
+  # DeepgramASR:
+  #   type: deepgram
+  #   api_key: "deepgram_key"
+  #   model: nova-2
+  #   language: vi
+  #   smart_format: true
+  #   numerals: true
+  #   diarize: false
+  #   tier:
+  #   version:
+  #   output_dir: tmp/
+
+  # GroqASR:
+  #   type: openai
+  #   api_key: "sk-groq-XXXXXXXXXXXXXXXX"
+  #   model_name: whisper-large-v3-turbo
+  #   base_url: https://api.groq.com/openai/v1/audio/transcriptions
+  #   output_dir: tmp/
+
+  VietNamASRLocal:
+    type: sherpa_onnx_local
+    # Repository ID trên HuggingFace Hub (Transducer model)
+    # Default repo: hynt/Zipformer-30M-RNNT-6000h (không cần config filename)
+    repo_id: hynt/Zipformer-30M-RNNT-6000h
+    # Thư mục lưu model files
+    # model_dir: app/models_data/sherpa_onnx_local
+    # Thư mục lưu file âm thanh tạm
+    output_dir: tmp/
+    # Sử dụng phiên bản int8 (tiết kiệm bộ nhớ, chạy nhanh hơn)
+    use_int8: true
+    # Phương án 1: Tối ưu độ chính xác - Tăng Threads & Beam Search
+    num_threads: 2 # Tăng từ 2 → 8 (sử dụng nhiều CPU cores)
+    decoding_method: modified_beam_search # Từ greedy_search → beam_search
+  #   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # QUAN TRỌNG: Khi dùng custom repo_id (khác default), BẮT BUỘC phải có:
+  #   encoder_filename, decoder_filename, joiner_filename
+  # Mỗi repo HuggingFace có tên file model khác nhau!
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # encoder_filename: "encoder.onnx"      # Tên file encoder
+  # decoder_filename: "decoder.onnx"      # Tên file decoder
+  # joiner_filename: "joiner.onnx"        # Tên file joiner
+  # tokens_filename: "config.json"        # Tên file tokens (default: config.json)
+
+  # Ví dụ: Sherpa-ONNX Streaming Zipformer (custom repo)
+  # VietNamASRZipformer:
+  #   type: sherpa_onnx_local
+  #   repo_id: csukuangfj/sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20
+  #   encoder_filename: encoder-epoch-99-avg-1.onnx
+  #   decoder_filename: decoder-epoch-99-avg-1.onnx
+  #   joiner_filename: joiner-epoch-99-avg-1.onnx
+  #   tokens_filename: tokens.txt
+  #   output_dir: tmp/
+  #   use_int8: false
+  #   num_threads: 4
+  #   decoding_method: greedy_search
+
+  ChunkformerASR:
+    type: chunkformer
+    # Repository ID trên HuggingFace Hub (Mô hình Chunkformer RNNT cho tiếng Việt)
+    repo_id: khanhld/chunkformer-rnnt-large-vie
+    # Thư mục lưu model files (tương đối với models_data dir)
+    model_dir: chunkformer
+    # Thư mục lưu file âm thanh tạm
+    output_dir: tmp/
+    # Chunkformer specific parameters - Phương án 2: Tối Ưu Độ Chính Xác
+    # Độ chính xác cao nhất, độ trễ ~1-2s, tốt cho câu dài/phức tạp
+    chunk_size: 128 # Tăng từ 64 → 128 (tăng context)
+    left_context_size: 256 # Tăng từ 128 → 256 (context bên trái)
+    right_context_size: 256 # Tăng từ 128 → 256 (context bên phải)
+    total_batch_duration: 3600 # Tăng từ 1800 → 3600 (giây)
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # ElevenLabs Speech-to-Text Realtime WebSocket
+  # Tài liệu: https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # ElevenLabsASR:
+  #   type: elevenlabs_stream
+  #   # API key - Bắt buộc
+  #   api_key: "api_key_here"
+  #   # Model ID (mặc định: scribe_v2_realtime)
+  #   model_id: "scribe_v2_realtime"
+  #   # Mã ngôn ngữ (optional): vi, en, fr, etc. (ISO 639-1 hoặc 639-3)
+  #   # Để trống hoặc comment = auto detect
+  #   # language_code: "vi"
+  #   # Định dạng audio: pcm_16000, pcm_22050, pcm_24000, pcm_44100, ulaw_8000
+  #   audio_format: "pcm_16000"
+  #   # Chiến lược commit: "manual" hoặc "vad" (voice activity detection)
+  #   # vad = tự động detect khi người dùng ngừng nói
+  #   # manual = ghi nhận từng chunk, cần gửi commit=true
+  #   commit_strategy: "vad"
+  #   # VAD Parameters (chỉ dùng khi commit_strategy=vad)
+  #   vad_silence_threshold_secs: 1.5 # Ngưỡng im lặng (giây)
+  #   vad_threshold: 0.4 # Threshold nhận biết giọng nói (0-1)
+  #   min_speech_duration_ms: 250 # Tối thiểu thời lượng tiếng nói (ms)
+  #   min_silence_duration_ms: 1500 # Tối thiểu thời lượng im lặng (ms) - Range: 50-2000
+  #   # Bật timestamps từng từ trong kết quả
+  #   include_timestamps: false
+  #   # Bật logging phía ElevenLabs
+  #   enable_logging: true
+  #   # Thư mục lưu file âm thanh tạm
+  #   output_dir: tmp/
+
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # WhisperCpp - Sử dụng whisper.cpp (pywhispercpp binding)
+  # Models: tiny, base, small, medium, large, large-v2, large-v3
+  # # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WhisperCppASR:
+    type: whisper_cpp
+    # Model name: tiny, base, small, medium, large, large-v2, large-v3
+    # tiny: ~75MB, nhanh nhất, độ chính xác thấp
+    # base: ~142MB, cân bằng tốc độ/chính xác
+    # small: ~466MB, chính xác hơn (KHUYÊN DÙNG cho song ngữ)
+    # medium: ~1.5GB, chính xác cao
+    # large-v3: ~3GB, chính xác nhất
+    model_name: base
+    # Ngôn ngữ:
+    #   - "vi" : tiếng Việt (KHUYÊN DÙNG - ổn định, ít hallucination)
+    #   - "auto" : tự động detect (cần model small+ để tránh hallucination)
+    # ⚠️ LƯU Ý: model base + auto dễ bị hallucination (output sai hoàn toàn)
+    language: "vi"
+    # Initial prompt: hint ngôn ngữ để giảm hallucination khi dùng "auto"
+    # Dùng khi cần song ngữ + model nhỏ (base)
+    initial_prompt: "Đây là đoạn hội thoại tiếng Việt có thể chứa một số từ tiếng Anh."
+    # Thư mục lưu model (tương đối với models_data dir)
+    model_dir: whisper_cpp
+    # Thư mục lưu file âm thanh tạm
+    output_dir: tmp/
+    # Số threads CPU sử dụng
+    n_threads: 4
+    # Debug options
+    print_realtime: false
+    print_progress: false
+
+
+# ============================================================================
+# MEMORY - BỘ NHỚ
+# ============================================================================
+
+Memory:
+  nomem:
+    type: nomem
+
+  mem_local_short:
+    type: mem_local_short
+    llm: CopilotLLM
+
